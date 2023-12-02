@@ -1,1 +1,1 @@
-"# Advent of Code 2023! -Aurora Evalon" 
+# Advent of Code 2023! -Aurora Evalon
