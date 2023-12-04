@@ -1,25 +1,27 @@
-import regex
-
 text = open("Day 2\\cubeInput.txt", "r")
 data = text.read()
 
-handsList=[]
+output = 0
 game = 0
 splitData = data.split("\n")
 for x in splitData:
-    game += 1
+    valid  = True
     formattedData = x[5:]
     formattedData = formattedData.split(":")
+    game = int(formattedData[0])
     set = formattedData[1].split(";")
     for x in set:
         hands = x.split(",")
-        handsList += hands
-    handColor = regex.split("a-m", hands)
-    handAmount = regex.split("1-9", hands)
-    for x in handsList:
-        if handColor == "blue" and handAmount <= 14:
-            blueValid = "true"
-        else:
-            blueValid = "false"
-    
-    handsList=[]
+        for cube in hands:
+            handColor = cube.strip().split(" ")[1]
+            handAmount = cube.strip().split(" ")[0]
+            handAmount = int(handAmount)
+            if handColor == "blue" and handAmount > 14:
+                valid = False
+            if handColor == "red" and handAmount > 12:
+                valid = False
+            if handColor == "green" and handAmount > 13:
+                valid = False
+    if valid:
+        output = output + game  
+print(output)
